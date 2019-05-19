@@ -30,10 +30,13 @@ void Ball::destroy()
 
 void Ball::start()
 {
-	float randomAngle = std::rand();
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> dist(0, 360);	//Random starting angle between -90 degrees and 90.
+	float randomAngle = dist(rng);
 	m_position = glm::vec2(300, 300);
 	model = glm::mat4(1.0f);
-	translation = glm::vec3(glm::cos(glm::radians(randomAngle)), -glm::sin(glm::radians(randomAngle)), 0.0f) * 5.0f;
+	translation = glm::vec3(glm::cos(glm::radians(randomAngle)), -glm::sin(glm::radians(randomAngle)), 0.0f) * 7.5f;
 }
 
 int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle)
@@ -42,10 +45,14 @@ int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle)
 	m_position.x += translation.x;
 	m_position.y += translation.y;
 
-	//if ((m_position.x >= 600 && translation.x > 0) || (m_position.x <= 600 && translation.x < 0))
-	//	translation.x = -translation.x;
-	//if ((m_position.y >= 600 && translation.y > 0) || (m_position.y <= 0 && translation.x < 0))
-	//	translation.y = -translation.y;
+	//Generate random vector so that paddle bouncing has variation
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> dist(-90,90);	//More variation for paddle hits.
+	float randInt = dist(rng);
+	glm::vec2 variationTransform = glm::vec2(glm::cos(glm::radians(randInt)), -glm::sin(glm::radians(randInt)));
+
+
 	float ballFarRight = m_position.x + 7.5f;
 	float ballFarLeft = m_position.x - 7.5f;
 	float ballTop = m_position.y + 7.5f;
@@ -54,12 +61,14 @@ int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle)
 	{
 		glm::vec2 vec2trans = glm::vec2(translation.x, translation.y);
 		vec2trans = vec2trans - 2.0f * glm::vec2(-1, 0) * glm::dot(glm::vec2(-1, 0), vec2trans);
+		vec2trans += variationTransform;
 		translation = glm::vec3(vec2trans, 0.0f);
 	}
 	if (ballFarLeft <= lPaddle.x + 5 && ballFarLeft > lPaddle.x - 5 && ballBottom <= lPaddle.y + 50 && ballTop >= lPaddle.y - 50 && translation.x < 0)
 	{
 		glm::vec2 vec2trans = glm::vec2(translation.x, translation.y);
 		vec2trans = vec2trans - 2.0f * glm::vec2(1, 0) * glm::dot(glm::vec2(1, 0), vec2trans);
+		vec2trans += variationTransform;
 		translation = glm::vec3(vec2trans, 0.0f);
 	}
 	if (ballTop >= 600 && translation.y > 0)

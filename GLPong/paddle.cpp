@@ -33,6 +33,12 @@ void Paddle::destroy()
 	///TODO: Complete. cba
 }
 
+void Paddle::reset()
+{
+	m_position.y = 300;
+	model = glm::mat4(1);
+}
+
 void Paddle::update(float yVelocity)
 {
 	if ((m_position.y + 50 >= 600 && yVelocity > 0) || (m_position.y - 50 <= 0 && yVelocity < 0))

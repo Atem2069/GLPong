@@ -13,6 +13,8 @@ public:
 	bool init(glm::vec2 position,glm::vec2 size);
 	void destroy();
 
+	void reset();
+
 	void update(float yVelocity);
 	void draw();
 

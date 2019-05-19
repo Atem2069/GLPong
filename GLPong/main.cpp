@@ -40,6 +40,8 @@ int main()
 
 	int lYVelocity = 0, rYVelocity = 0;
 	int roundRet = 0;
+
+	bool rKeyDepressed = false;
 	while (!glfwWindowShouldClose(window))
 	{
 		lYVelocity = 0;
@@ -53,11 +55,16 @@ int main()
 			lYVelocity = 10;
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 			lYVelocity = -10;
-		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS && rKeyDepressed == false)
 		{
+			rKeyDepressed = true;
 			std::cout << "Round reset" << std::endl;
 			ball.start();
+			lPaddle.reset();
+			rPaddle.reset();
 		}
+		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE)
+			rKeyDepressed = false;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		renderer.update();
@@ -86,6 +93,8 @@ int main()
 			}
 
 			ball.start();	//Reset ball position.
+			lPaddle.reset();
+			rPaddle.reset();
 		}
 	}
 
