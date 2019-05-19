@@ -8,20 +8,18 @@ bool Renderer::init(GLADloadproc glfwLoadProc)
 		return false;
 	}
 
-	int vertSrcSize, fragSrcSize;
-	std::string tempSource;
+	const std::string vertexShaderSource =
+	#include "shaders\pongVtx.glsl"
+	;
+	const char * vertSrc = vertexShaderSource.c_str();
 
-	//Really dirty loader.
-	std::ifstream inFile;
-	inFile.open("Shaders\\pongVtx.glsl");
-	std::stringstream inStrm;
-	inStrm << inFile.rdbuf();
-	
-	tempSource = inStrm.str();
-	const char * vertSrc = tempSource.c_str();
-	vertSrcSize = tempSource.size();
+	const std::string fragmentShaderSource =
+	#include "Shaders\pongFrag.glsl"
+	;
+	const char * fragSrc = fragmentShaderSource.c_str();
 
 	GLint compileStatus = 0;
+
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertSrc, nullptr);
 	glCompileShader(vertexShader);
@@ -32,17 +30,6 @@ bool Renderer::init(GLADloadproc glfwLoadProc)
 		return false;
 	}
 
-	inFile.close();
-	inStrm.str(std::string());
-
-	inFile.open("Shaders\\pongFrag.glsl");
-	inStrm << inFile.rdbuf();
-
-
-	tempSource = inStrm.str();
-	const char * fragSrc = tempSource.c_str();
-	fragSrcSize = tempSource.size();
-
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragSrc, nullptr);
 	glCompileShader(fragmentShader);
@@ -52,7 +39,6 @@ bool Renderer::init(GLADloadproc glfwLoadProc)
 		std::cout << "Failed to compile fragment shader." << std::endl;
 		return false;
 	}
-
 	program = glCreateProgram();
 	glAttachShader(program, vertexShader);
 	glAttachShader(program, fragmentShader);

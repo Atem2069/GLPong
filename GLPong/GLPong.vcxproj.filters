@@ -41,13 +41,11 @@
     <ClInclude Include="ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\pongFrag.glsl">
+    <ClInclude Include="Shaders\pongFrag.glsl">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\pongVtx.glsl">
+    </ClInclude>
+    <ClInclude Include="Shaders\pongVtx.glsl">
       <Filter>Shaders</Filter>
-    </None>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -132,8 +132,12 @@
     <ClInclude Include="renderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\pongFrag.glsl" />
-    <None Include="Shaders\pongVtx.glsl" />
+    <ClInclude Include="Shaders\pongFrag.glsl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClInclude Include="Shaders\pongVtx.glsl">
+      <FileType>Document</FileType>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

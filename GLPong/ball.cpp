@@ -48,7 +48,7 @@ int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle)
 	//Generate random vector so that paddle bouncing has variation
 	std::random_device rd;
 	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> dist(-90,90);	//More variation for paddle hits.
+	std::uniform_int_distribution<int> dist(-45,45);	//More variation for paddle hits.
 	float randInt = dist(rng);
 	glm::vec2 variationTransform = glm::vec2(glm::cos(glm::radians(randInt)), -glm::sin(glm::radians(randInt)));
 
