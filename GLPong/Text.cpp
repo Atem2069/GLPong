@@ -1,6 +1,6 @@
 #include "Text.h"
 
-bool Text::init(std::string fontPath, int width, int height)
+bool Text::init(std::string fontPath, int fontSize, int width, int height)
 {
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
@@ -16,7 +16,7 @@ bool Text::init(std::string fontPath, int width, int height)
 		return false;
 	}
 
-	FT_Set_Pixel_Sizes(face, 0, 48);
+	FT_Set_Pixel_Sizes(face, 0,fontSize);
 
 
 	//Loading all glyphs into map
@@ -66,7 +66,6 @@ bool Text::init(std::string fontPath, int width, int height)
 		;
 
 
-	char infolog[500];
 	const char * vertShader = vertexShaderSource.c_str();
 	const char * fragShader = fragmentShaderSource.c_str();
 
@@ -77,18 +76,12 @@ bool Text::init(std::string fontPath, int width, int height)
 	glShaderSource(fragmentShader, 1, &fragShader, 0);
 
 	glCompileShader(vertexShader);
-	glGetShaderInfoLog(vertexShader, 500, nullptr, infolog);
-	std::cout << infolog << std::endl;
 	glCompileShader(fragmentShader);
-	glGetShaderInfoLog(fragmentShader, 500, nullptr, infolog);
-	std::cout << infolog << std::endl;
 	program = glCreateProgram();
 	glAttachShader(program,vertexShader);
 	glAttachShader(program,fragmentShader);
 
 	glLinkProgram(program);
-	glGetProgramInfoLog(program, 500, nullptr, infolog);
-	std::cout << infolog << std::endl;
 
 	proj = glm::ortho(0.0f,(float)width,0.0f,(float)height);
 

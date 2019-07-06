@@ -23,7 +23,7 @@ struct Character
 class Text
 {
 public:
-	bool init(std::string fontPath, int width, int height);
+	bool init(std::string fontPath, int fontSize, int width, int height);
 	void destroy();
 
 	void drawText(std::string text, glm::vec2 position, glm::vec3 colour, float scale);

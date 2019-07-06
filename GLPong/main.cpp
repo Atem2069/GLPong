@@ -39,9 +39,10 @@ int main()
 	rPaddle.init(glm::vec2(550, 300), glm::vec2(10, 100));
 
 	Text sampleText;
-	sampleText.init("Fonts\\bit5x5.ttf", 600, 600);
+	if (!sampleText.init("Fonts\\bit5x5.ttf", 96, 600, 600))
+		return -1;
 
-	glfwSwapInterval(1);
+	glfwSwapInterval(0);
 
 	int lYVelocity = 0, rYVelocity = 0;
 	int roundRet = 0;
@@ -51,18 +52,19 @@ int main()
 	std::cout << "All GL objects passed." << std::endl;
 
 	float oldTime = glfwGetTime(), newTime, deltaTime = 1;
+	int fps = 0;
 	int lscore = 0, rscore = 0;
-
 	while (glfwGetKey(window, GLFW_KEY_ENTER) != GLFW_PRESS && !glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		sampleText.drawText("PONG", glm::vec2(150, 500), glm::vec3(1, 0, 0), 2.0f);
-		sampleText.drawText("Press ENTER to play.", glm::vec2(150, 400), glm::vec3(1, 1, 1), 0.5f);
-		glfwSwapBuffers(window);
 		glfwPollEvents();
+		glClear(GL_COLOR_BUFFER_BIT);
+		sampleText.drawText("PONG", glm::vec2(150, 500), glm::vec3(1, 0, 0), 1.0f);
+		sampleText.drawText("Press ENTER to play.", glm::vec2(150, 400), glm::vec3(1, 1, 1), 0.25f);
+		glfwSwapBuffers(window);
 	}
 	while (!glfwWindowShouldClose(window))
 	{
+		glfwPollEvents();
 		lYVelocity = 0;
 		rYVelocity = 0;
 
@@ -81,6 +83,8 @@ int main()
 			ball.start();
 			lPaddle.reset();
 			rPaddle.reset();
+			lscore = 0;
+			rscore = 0;
 		}
 		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE)
 			rKeyDepressed = false;
@@ -97,11 +101,10 @@ int main()
 		roundRet = ball.update(lPaddle.getCurrentPosition(),rPaddle.getCurrentPosition(),deltaTime);
 		ball.draw();
 
-		sampleText.drawText(std::to_string(lscore), glm::vec2(100, 500), glm::vec3(1, 1, 1), 2.0f);
-		sampleText.drawText(std::to_string(rscore), glm::vec2(450, 500), glm::vec3(1, 1, 1), 2.0f);
-
+		sampleText.drawText(std::to_string(lscore), glm::vec2(100, 500), glm::vec3(1, 1, 1), 1.0f);
+		sampleText.drawText(std::to_string(rscore), glm::vec2(450, 500), glm::vec3(1, 1, 1), 1.0f);
+		sampleText.drawText(std::to_string(fps)+" FPS", glm::vec2(0, 10), glm::vec3(1, 1, 1), 0.25f);
 		glfwSwapBuffers(window);
-		glfwPollEvents();
 
 		if (roundRet)
 		{
@@ -124,7 +127,7 @@ int main()
 		newTime = glfwGetTime();
 		deltaTime = newTime - oldTime;
 		oldTime = newTime;
-
+		fps = 1 / deltaTime;
 	}
 
 	return 0;
