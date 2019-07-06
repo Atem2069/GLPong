@@ -2,13 +2,13 @@
 
 bool Renderer::init(GLADloadproc glfwLoadProc)
 {
-	if (!gladLoadGLLoader(glfwLoadProc))
+	if (!gladLoadGLLoader(glfwLoadProc))	
 	{
 		std::cout << "Failed to load OpenGL functions.." << std::endl;
 		return false;
 	}
 
-	const std::string vertexShaderSource =
+	const std::string vertexShaderSource =			
 	#include "shaders\pongVtx.glsl"
 	;
 	const char * vertSrc = vertexShaderSource.c_str();

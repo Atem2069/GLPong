@@ -16,6 +16,7 @@ bool Ball::init()
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 
@@ -98,7 +99,6 @@ int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle)
 void Ball::draw()
 {
 	glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 

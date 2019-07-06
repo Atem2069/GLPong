@@ -22,6 +22,7 @@ int main()
 	
 	glfwMakeContextCurrent(window);
 
+	std::cout << "Initializing renderer" << std::endl;
 	Renderer renderer;
 	if (!renderer.init((GLADloadproc)glfwGetProcAddress))
 		return -1;
@@ -42,6 +43,8 @@ int main()
 	int roundRet = 0;
 
 	bool rKeyDepressed = false;
+
+	std::cout << "All GL objects passed." << std::endl;
 	while (!glfwWindowShouldClose(window))
 	{
 		lYVelocity = 0;
@@ -96,6 +99,7 @@ int main()
 			lPaddle.reset();
 			rPaddle.reset();
 		}
+
 	}
 
 	return 0;

@@ -20,7 +20,7 @@ bool Paddle::init(glm::vec2 position, glm::vec2 size)
 	//Generate VAO and set attrib call
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
-
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 
@@ -51,7 +51,6 @@ void Paddle::update(float yVelocity)
 void Paddle::draw()
 {
 	glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
