@@ -39,7 +39,7 @@ int main()
 	rPaddle.init(glm::vec2(550, 300), glm::vec2(10, 100));
 
 	Text sampleText;
-	sampleText.init("Fonts\\bit5x3.ttf", 600, 600);
+	sampleText.init("Fonts\\bit5x5.ttf", 600, 600);
 
 	glfwSwapInterval(1);
 
@@ -52,6 +52,15 @@ int main()
 
 	float oldTime = glfwGetTime(), newTime, deltaTime = 1;
 	int lscore = 0, rscore = 0;
+
+	while (glfwGetKey(window, GLFW_KEY_ENTER) != GLFW_PRESS && !glfwWindowShouldClose(window))
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		sampleText.drawText("PONG", glm::vec2(150, 500), glm::vec3(1, 0, 0), 2.0f);
+		sampleText.drawText("Press ENTER to play.", glm::vec2(150, 400), glm::vec3(1, 1, 1), 0.5f);
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
 	while (!glfwWindowShouldClose(window))
 	{
 		lYVelocity = 0;
