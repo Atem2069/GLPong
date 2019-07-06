@@ -15,7 +15,7 @@ public:
 
 	void reset();
 
-	void update(float yVelocity);
+	void update(float yVelocity, float deltaTime);
 	void draw();
 
 	glm::vec2 getCurrentPosition();

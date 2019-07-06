@@ -45,6 +45,8 @@ int main()
 	bool rKeyDepressed = false;
 
 	std::cout << "All GL objects passed." << std::endl;
+
+	float oldTime = glfwGetTime(), newTime, deltaTime = 1;
 	while (!glfwWindowShouldClose(window))
 	{
 		lYVelocity = 0;
@@ -72,13 +74,13 @@ int main()
 
 		renderer.update();
 
-		lPaddle.update(lYVelocity);
+		lPaddle.update(lYVelocity,deltaTime);
 		lPaddle.draw();
 
-		rPaddle.update(rYVelocity);
+		rPaddle.update(rYVelocity,deltaTime);
 		rPaddle.draw();
 
-		roundRet = ball.update(lPaddle.getCurrentPosition(),rPaddle.getCurrentPosition());
+		roundRet = ball.update(lPaddle.getCurrentPosition(),rPaddle.getCurrentPosition(),deltaTime);
 		ball.draw();
 
 		glfwSwapBuffers(window);
@@ -99,6 +101,10 @@ int main()
 			lPaddle.reset();
 			rPaddle.reset();
 		}
+
+		newTime = glfwGetTime();
+		deltaTime = newTime - oldTime;
+		oldTime = newTime;
 
 	}
 

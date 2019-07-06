@@ -16,7 +16,7 @@ public:
 
 	void start();
 
-	int update(glm::vec2 lPaddle, glm::vec2 rPaddle);
+	int update(glm::vec2 lPaddle, glm::vec2 rPaddle, float deltaTime);
 	void draw();
 
 	glm::vec2 getCurrentPosition();

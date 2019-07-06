@@ -40,11 +40,12 @@ void Ball::start()
 	translation = glm::vec3(glm::cos(glm::radians(randomAngle)), -glm::sin(glm::radians(randomAngle)), 0.0f) * 7.5f;
 }
 
-int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle)
+int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle, float deltaTime)
 {
-	model = glm::translate(model, translation);
-	m_position.x += translation.x;
-	m_position.y += translation.y;
+	float gameSpeed = 50.0f * deltaTime;
+	model = glm::translate(model, translation * gameSpeed);
+	m_position.x += translation.x * gameSpeed;
+	m_position.y += translation.y * gameSpeed;
 
 	//Generate random vector so that paddle bouncing has variation
 	std::random_device rd;

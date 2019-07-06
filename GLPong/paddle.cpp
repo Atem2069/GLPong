@@ -39,8 +39,10 @@ void Paddle::reset()
 	model = glm::mat4(1);
 }
 
-void Paddle::update(float yVelocity)
+void Paddle::update(float yVelocity, float deltaTime)
 {
+	float gameSpeed = 50 * deltaTime;
+	yVelocity *= gameSpeed;
 	if ((m_position.y + 50 >= 600 && yVelocity > 0) || (m_position.y - 50 <= 0 && yVelocity < 0))
 		yVelocity = 0;
 	m_position.y += yVelocity;
