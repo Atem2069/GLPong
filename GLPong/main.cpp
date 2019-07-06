@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include "paddle.h"
 #include "ball.h"
+#include "Text.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -37,6 +38,9 @@ int main()
 	Paddle rPaddle;
 	rPaddle.init(glm::vec2(550, 300), glm::vec2(10, 100));
 
+	Text sampleText;
+	sampleText.init("Fonts\\bit5x3.ttf", 600, 600);
+
 	glfwSwapInterval(1);
 
 	int lYVelocity = 0, rYVelocity = 0;
@@ -47,6 +51,7 @@ int main()
 	std::cout << "All GL objects passed." << std::endl;
 
 	float oldTime = glfwGetTime(), newTime, deltaTime = 1;
+	int lscore = 0, rscore = 0;
 	while (!glfwWindowShouldClose(window))
 	{
 		lYVelocity = 0;
@@ -83,6 +88,9 @@ int main()
 		roundRet = ball.update(lPaddle.getCurrentPosition(),rPaddle.getCurrentPosition(),deltaTime);
 		ball.draw();
 
+		sampleText.drawText(std::to_string(lscore), glm::vec2(100, 500), glm::vec3(1, 1, 1), 2.0f);
+		sampleText.drawText(std::to_string(rscore), glm::vec2(450, 500), glm::vec3(1, 1, 1), 2.0f);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
@@ -91,10 +99,12 @@ int main()
 			if (roundRet == 1)
 			{
 				std::cout << "Round has ended. Player 1 wins" << std::endl;
+				lscore += 1;
 			}
 			else if (roundRet == 2)
 			{
 				std::cout << "Round has ended. Player 2 wins" << std::endl;
+				rscore += 1;
 			}
 
 			ball.start();	//Reset ball position.

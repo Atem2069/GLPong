@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{e7c9c473-9c18-49d1-b0ed-778a28aa0a46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Text">
+      <UniqueIdentifier>{dc73ee25-e0bf-4242-a709-db858cafa396}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,5 +56,13 @@
     <ClInclude Include="Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Text\frag.glsl">
+      <Filter>Shaders\Text</Filter>
+    </None>
+    <None Include="Shaders\Text\vert.glsl">
+      <Filter>Shaders\Text</Filter>
+    </None>
   </ItemGroup>
 </Project>
