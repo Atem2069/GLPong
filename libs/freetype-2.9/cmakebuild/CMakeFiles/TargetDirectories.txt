@@ -1,6 +1,0 @@
-C:/Users/Henry/source/repos/Opengl-Text-Rendering/Libraries/freetype-2.9/cmakebuild/CMakeFiles/PACKAGE.dir
-C:/Users/Henry/source/repos/Opengl-Text-Rendering/Libraries/freetype-2.9/cmakebuild/CMakeFiles/freetype.dir
-C:/Users/Henry/source/repos/Opengl-Text-Rendering/Libraries/freetype-2.9/cmakebuild/CMakeFiles/dist.dir
-C:/Users/Henry/source/repos/Opengl-Text-Rendering/Libraries/freetype-2.9/cmakebuild/CMakeFiles/INSTALL.dir
-C:/Users/Henry/source/repos/Opengl-Text-Rendering/Libraries/freetype-2.9/cmakebuild/CMakeFiles/ALL_BUILD.dir
-C:/Users/Henry/source/repos/Opengl-Text-Rendering/Libraries/freetype-2.9/cmakebuild/CMakeFiles/ZERO_CHECK.dir
