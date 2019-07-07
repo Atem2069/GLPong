@@ -14,10 +14,10 @@
 
 struct Character
 {
-	GLuint textureID;
-	glm::ivec2 size;
-	glm::ivec2 bearing;
-	GLuint advance;
+	GLuint textureID;	//GL texture handle
+	glm::ivec2 size;	//Actual size of the texture
+	glm::ivec2 bearing;	//Bearing being positioning into actual character from origin
+	GLuint advance;	//Spacing to next char
 };
 
 class Text

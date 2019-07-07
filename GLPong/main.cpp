@@ -30,7 +30,6 @@ int main()
 
 	Ball ball;
 	ball.init();
-	ball.start();
 
 	Paddle lPaddle;
 	lPaddle.init(glm::vec2(50, 300), glm::vec2(10, 100));
@@ -42,7 +41,7 @@ int main()
 	if (!sampleText.init("Fonts\\bit5x5.ttf", 96, 600, 600))
 		return -1;
 
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 
 	int lYVelocity = 0, rYVelocity = 0;
 	int roundRet = 0;
@@ -51,7 +50,6 @@ int main()
 
 	std::cout << "All GL objects passed." << std::endl;
 
-	float oldTime = glfwGetTime(), newTime, deltaTime = 1;
 	int fps = 0;
 	int lscore = 0, rscore = 0;
 	while (glfwGetKey(window, GLFW_KEY_ENTER) != GLFW_PRESS && !glfwWindowShouldClose(window))
@@ -59,9 +57,15 @@ int main()
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT);
 		sampleText.drawText("PONG", glm::vec2(150, 500), glm::vec3(1, 0, 0), 1.0f);
-		sampleText.drawText("Press ENTER to play.", glm::vec2(150, 400), glm::vec3(1, 1, 1), 0.25f);
+		sampleText.drawText("Press ENTER to play", glm::vec2(150, 400), glm::vec3(1, 1, 1), 0.25f);
 		glfwSwapBuffers(window);
 	}
+
+
+	float oldTime = glfwGetTime(), newTime, deltaTime = 0;
+	ball.start();
+	lPaddle.reset();
+	rPaddle.reset();
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();

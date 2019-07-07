@@ -41,7 +41,7 @@ void Paddle::reset()
 
 void Paddle::update(float yVelocity, float deltaTime)
 {
-	float gameSpeed = 50 * deltaTime;
+	float gameSpeed = 75.0f * deltaTime;
 	yVelocity *= gameSpeed;
 	if ((m_position.y + 50 >= 600 && yVelocity > 0) || (m_position.y - 50 <= 0 && yVelocity < 0))
 		yVelocity = 0;

@@ -4,7 +4,7 @@ R"(
 
 in vec2 texCoords;
 layout(location=1)uniform vec3 colour;
-uniform sampler2D text;
+layout(binding=0)uniform sampler2D text;
 
 out vec4 fragColour;
 

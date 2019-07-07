@@ -42,11 +42,10 @@ void Ball::start()
 
 int Ball::update(glm::vec2 lPaddle, glm::vec2 rPaddle, float deltaTime)
 {
-	float gameSpeed = 50.0f * deltaTime;
+	float gameSpeed = 75.0f * deltaTime;
 	model = glm::translate(model, translation * gameSpeed);
 	m_position.x += translation.x * gameSpeed;
 	m_position.y += translation.y * gameSpeed;
-
 	//Generate random vector so that paddle bouncing has variation
 	std::random_device rd;
 	std::mt19937 rng(rd());

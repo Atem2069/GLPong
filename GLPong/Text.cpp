@@ -87,7 +87,7 @@ bool Text::init(std::string fontPath, int fontSize, int width, int height)
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, nullptr, GL_DYNAMIC_DRAW);
+	glBufferStorage(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, nullptr, GL_DYNAMIC_STORAGE_BIT);
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -145,7 +145,6 @@ void Text::drawText(std::string text, glm::vec2 position, glm::vec3 colour, floa
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-
 		position.x += (ch.advance >> 6) * scale;	//Scaling to pixels w bit shift 
 	}
 }
