@@ -134,5 +134,10 @@ int main()
 		fps = 1 / deltaTime;
 	}
 
+	ball.destroy();
+	lPaddle.destroy();
+	rPaddle.destroy();
+	sampleText.destroy();
+
 	return 0;
 }

@@ -102,7 +102,8 @@ bool Text::init(std::string fontPath, int fontSize, int width, int height)
 
 void Text::destroy()
 {
-	//todo.
+	for (std::pair<GLchar,Character> c : characters)
+		glDeleteTextures(1, &c.second.textureID);
 }
 
 void Text::drawText(std::string text, glm::vec2 position, glm::vec3 colour, float scale)
